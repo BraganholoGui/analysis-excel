@@ -137,7 +137,7 @@ function Home() {
                 {
                   cont == 1 ?
                     item.map((subitem, subindex) => (
-                      <button style={{ width: '600px', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
+                      <button style={{ width: '750px', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
                         toggle();
                         getAllInfo(subitem[0])
                       }}>{subitem[0]}</button>
