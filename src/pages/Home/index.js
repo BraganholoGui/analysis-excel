@@ -127,7 +127,7 @@ function Home() {
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
         <input type="file" onChange={handleFileChange} />
       </div>
-      <div>
+      <div style={{display:'grid', flexDirection:'column', width:'100%', alignItems:'center', justifyContent:'center', gridTemplateColumns:'auto auto auto'}}>
         {json && json.length > 0 ?
           json.map((item, index) => {
             cont++
@@ -137,7 +137,7 @@ function Home() {
                 {
                   cont == 1 ?
                     item.map((subitem, subindex) => (
-                      <button style={{ width: '750px', marginTop:'1%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
+                      <button style={{ width: '400px', margin:'2%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
                         toggle();
                         getAllInfo(subitem[0])
                       }}>{subitem[0]}</button>
