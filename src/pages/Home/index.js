@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Pie, Bubble } from 'react-chartjs-2';
-import {
-  Chart as ChartJS, ArcElement, Tooltip, Legend,
+import { Pie,Bubble } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend,
   LinearScale,
   PointElement,
-} from 'chart.js';
+     } from 'chart.js';
 import { Modal, ModalBody } from 'reactstrap';
 import { useEffect } from 'react';
 
@@ -49,9 +48,9 @@ function Home() {
         }
       })
     })
-    if (table == "Escreva algumas linhas sobre sua história e seus sonhos de vida.") {
+    if(table == "Escreva algumas linhas sobre sua história e seus sonhos de vida."){
       createDataInfoBubble(listInfo)
-    } else {
+    }else{
       createDataInfo(listInfo)
     }
 
@@ -72,7 +71,7 @@ function Home() {
   function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
+  
 
   function createDataInfoBubble(list) {
     let qtd = list.length;
@@ -81,36 +80,33 @@ function Home() {
     let listQtds = [];
     let listData = [];
     listAux = convertObjToArray(listAux)
-    listAux.map(item => {
+    listAux.map(item =>{
       listNames.push(item[0])
       listQtds.push(item[1])
     })
-    console.log('3', listAux)
+    console.log('3',listAux)
 
-    const options = {
-      scales: { x: { display: false }, y: { display: false } },
-      maintainAspectRatio: false,
-      // plugins: {
-      //   legend: {
-      //     display: false,
-      //   },
-      //   datalabels: {},
-      // },
+     const options = {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
     };
 
-    listAux.map(item => {
+    listAux.map(item=>{
       listData.push(
         {
           label: item[0],
           data: Array.from({ length: item[1] }, () => ({
-            x: getRandomNumber(0, 100),
-            y: getRandomNumber(0, 100),
-            r: item[1] * 7,
+            x:  getRandomNumber(0, 100),
+            y:  getRandomNumber(0,100),
+            r: item[1] * 7, 
           })),
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          pointStyle: 'rectRounded',
-          borderColor: 'red',
-          borderWidth: 1,
+          pointStyle:'rectRounded',
+          borderColor:'red',
+          borderWidth:1,
         }
       )
     })
@@ -128,8 +124,8 @@ function Home() {
     let listNames = [];
     let listQtds = [];
     listAux = convertObjToArray(listAux)
-    listAux.map(item => {
-      listNames.push(item[0] + ' ' + (item[1] * 100 / qtd).toFixed(2) + '%')
+    listAux.map(item =>{
+      listNames.push(item[0] + ' '+ ( item[1] * 100 /qtd).toFixed(2) + '%' )
       listQtds.push(item[1])
     })
 
@@ -191,7 +187,7 @@ function Home() {
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
         <input type="file" onChange={handleFileChange} />
       </div>
-      <div style={{ display: 'grid', flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', gridTemplateColumns: 'auto auto auto' }}>
+      <div style={{display:'grid', flexDirection:'column', width:'100%', alignItems:'center', justifyContent:'center', gridTemplateColumns:'auto auto auto'}}>
         {json && json.length > 0 ?
           json.map((item, index) => {
             cont++
@@ -201,13 +197,13 @@ function Home() {
                 {
                   cont == 1 ?
                     item.map((subitem, subindex) => (
-                      <button style={{ width: '400px', margin: '2%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
-                        if (subitem[0] == "Escreva algumas linhas sobre sua história e seus sonhos de vida.") {
+                      <button style={{ width: '400px', margin:'2%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
+                        if(subitem[0] == "Escreva algumas linhas sobre sua história e seus sonhos de vida."){
                           toggleBubble();
-                        } else {
+                        }else{
                           toggle();
                         }
-                        setTitle(subitem[0])
+                        setTitle(subitem)
                         getAllInfo(subitem[0])
                       }}>{subitem[0]}
                       </button>
@@ -223,11 +219,10 @@ function Home() {
       <Modal
         isOpen={isOpen}
         toggle={toggle}
-        size="lg" style={{ width: '100%', minHeight: '700px' }}
       >
         <ModalBody
-          style={{ width: '100%', minHeight: '700px' }}>
-          <div  style={{ width: '100%', display:'flex', justifyContent:'center', alignItem:'center', fontSize:'17px', fontWeight:'700', borderBottom:'1px solid black' }}>
+        style={{width:'500px'}}>
+             <div  style={{ width: '100%', display:'flex', justifyContent:'center', alignItem:'center', fontSize:'17px', fontWeight:'700', borderBottom:'1px solid black' }}>
             {title}
           </div>
           <Pie data={dataSelected} />
@@ -236,14 +231,14 @@ function Home() {
       <Modal
         isOpen={isOpenBubble}
         toggle={toggleBubble}
-        size="lg" style={{ width: '100%', minHeight: '800px'  }}
+        size="lg" style={{maxWidth: '900px', width: '100%', minHeight:'900px'}}
       >
         <ModalBody
-          size="lg" style={{width: '100%', minHeight: '800px' }}>
-           <div  style={{ width: '100%', display:'flex', justifyContent:'center', alignItem:'center' }}>
+        size="lg" style={{maxWidth: '900px', width: '100%', minHeight:'800px'}}>
+             <div  style={{ width: '100%', display:'flex', justifyContent:'center', alignItem:'center', fontSize:'17px', fontWeight:'700', borderBottom:'1px solid black' }}>
             {title}
           </div>
-          <Bubble data={dataSelected} options={dataOptions} />
+          <Bubble data={dataSelected} options={dataOptions}  />
         </ModalBody>
       </Modal>
     </div >
