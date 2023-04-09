@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie,Bubble } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend,
+  LinearScale,
+  PointElement,
+     } from 'chart.js';
 import { Modal, ModalBody } from 'reactstrap';
 import { useEffect } from 'react';
 
 const XLSX = require('xlsx');
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
 
 function Home() {
   const [json, setJson] = useState(null);
+  const [dataOptions, setDataOptions] = useState(null);
   const [dataSelected, setDataSelected] = useState(null);
   const [isOpen, setIsOpen] = useState(null);
+  const [isOpenBubble, setIsOpenBubble] = useState(null);
   let cont = 0;
 
   const toggle = () => setIsOpen(!isOpen);
+  const toggleBubble = () => setIsOpenBubble(!isOpenBubble);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -40,7 +47,11 @@ function Home() {
         }
       })
     })
-    createDataInfo(listInfo)
+    if(table == "Escreva algumas linhas sobre sua história e seus sonhos de vida."){
+      createDataInfoBubble(listInfo)
+    }else{
+      createDataInfo(listInfo)
+    }
 
   }
   function groupSames(list) {
@@ -55,19 +66,68 @@ function Home() {
 
     return counts
   }
+
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+
+  function createDataInfoBubble(list) {
+    let qtd = list.length;
+    let listAux = groupSames(list);
+    let listNames = [];
+    let listQtds = [];
+    let listData = [];
+    listAux = convertObjToArray(listAux)
+    listAux.map(item =>{
+      listNames.push(item[0])
+      listQtds.push(item[1])
+    })
+    console.log('3',listAux)
+
+     const options = {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    };
+
+    listAux.map(item=>{
+      listData.push(
+        {
+          label: item[0],
+          data: Array.from({ length: item[1] }, () => ({
+            x:  getRandomNumber(0, 100),
+            y:  getRandomNumber(0,100),
+            // r: getRandomNumber(5,20), //qtd * 7
+            r: item[1] * 7, //qtd * 7
+          })),
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          pointStyle:'rectRounded',
+          borderColor:'red',
+          borderWidth:1,
+        }
+      )
+    })
+
+    const data = {
+      datasets: listData
+    };
+
+    setDataSelected(data)
+    setDataOptions(options)
+  }
   function createDataInfo(list) {
     let qtd = list.length;
     let listAux = groupSames(list);
     let listNames = [];
     let listQtds = [];
-    console.log(listAux);
     listAux = convertObjToArray(listAux)
-    console.log(listAux);
     listAux.map(item =>{
-      listNames.push(item[0])
+      listNames.push(item[0] + ' '+ ( item[1] * 100 /qtd).toFixed(2) + '%' )
       listQtds.push(item[1])
     })
-    console.log('name', listNames)
 
     let final = {
       labels: listNames,
@@ -138,9 +198,14 @@ function Home() {
                   cont == 1 ?
                     item.map((subitem, subindex) => (
                       <button style={{ width: '400px', margin:'2%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
-                        toggle();
+                        if(subitem[0] == "Escreva algumas linhas sobre sua história e seus sonhos de vida."){
+                          toggleBubble();
+                        }else{
+                          toggle();
+                        }
                         getAllInfo(subitem[0])
-                      }}>{subitem[0]}</button>
+                      }}>{subitem[0]}
+                      </button>
                     ))
                     : null
                 }
@@ -154,8 +219,19 @@ function Home() {
         isOpen={isOpen}
         toggle={toggle}
       >
-        <ModalBody>
+        <ModalBody
+        style={{width:'500px'}}>
           <Pie data={dataSelected} />
+        </ModalBody>
+      </Modal>
+      <Modal
+        isOpen={isOpenBubble}
+        toggle={toggleBubble}
+        size="lg" style={{maxWidth: '700px', width: '100%', minHeight:'700px'}}
+      >
+        <ModalBody
+        size="lg" style={{maxWidth: '700px', width: '100%', minHeight:'600px'}}>
+          <Bubble data={dataSelected} options={dataOptions}  />
         </ModalBody>
       </Modal>
     </div >
