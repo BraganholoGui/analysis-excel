@@ -88,11 +88,14 @@ function Home() {
     console.log('3', listAux)
 
     const options = {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
+      scales: { x: { display: false }, y: { display: false } },
+      maintainAspectRatio: false,
+      // plugins: {
+      //   legend: {
+      //     display: false,
+      //   },
+      //   datalabels: {},
+      // },
     };
 
     listAux.map(item => {
@@ -223,7 +226,7 @@ function Home() {
         size="lg" style={{ width: '100%', minHeight: '700px' }}
       >
         <ModalBody
-          style={{ width: '100%' }}>
+          style={{ width: '100%', minHeight: '700px' }}>
           <div  style={{ width: '100%', display:'flex', justifyContent:'center', alignItem:'center', fontSize:'17px', fontWeight:'700', borderBottom:'1px solid black' }}>
             {title}
           </div>
