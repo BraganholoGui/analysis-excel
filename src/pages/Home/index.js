@@ -49,7 +49,7 @@ function Home() {
         }
       })
     })
-    if (table == "Escreva algumas linhas sobre sua história e seus sonhos de vida.") {
+    if (table == "Escreva algumas linhas sobre sua história e seus sonhos de vida." || table == "Informe o número do seu RA." || table == "Qual a sua data de nascimento?" || table == "Quais assuntos você pesquisa?" || table == "Quais fontes de entretenimento cultural você usa") {
       createDataInfoBubble(listInfo)
     } else {
       createDataInfo(listInfo)
@@ -85,34 +85,34 @@ function Home() {
       listNames.push(item[0])
       listQtds.push(item[1])
     })
-    console.log('3', listAux)
 
     const options = {
-  
+      scales: { x: { display: false, stepSize: 5, }, y: { display: false, stepSize: 5, } },
+      // maintainAspectRatio: false,
+      responsive:true,
+      plugins: {
+        legend: {
+          labels: {
+              font: {
+                  size: 15,
+                },
+                boxHeight:18
+          },
+          // maxHeight:500,
+          // maxWidth:100,
+      }
+      }
+      
     };
-    // const options = {
-    //   scales: { x: { display: false }, y: { display: false } },
-    //   // responsive : false,
-    //   maintainAspectRation: false,
-    //   layout: {
-    //     autoPadding: true
-    //   }
-    //   // plugins: {
-    //   //   legend: {
-    //   //     display: false,
-    //   //   },
-    //   //   datalabels: {},
-    //   // },
-    // };
 
     listAux.map(item => {
       listData.push(
         {
           label: item[0],
           data: Array.from({ length: item[1] }, () => ({
-            x: getRandomNumber(0, 100),
-            y: getRandomNumber(0, 100),
-            r: item[1] * 7,
+            x: getRandomNumber(0, 20),
+            y: getRandomNumber(0, 20),
+            r: item[1] * 6,
           })),
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
           pointStyle: 'rectRounded',
@@ -123,7 +123,8 @@ function Home() {
     })
 
     const data = {
-      datasets: listData
+      datasets: listData,
+
     };
 
     setDataSelected(data)
@@ -209,7 +210,7 @@ function Home() {
                   cont == 1 ?
                     item.map((subitem, subindex) => (
                       <button style={{ width: '400px', margin: '2%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
-                        if (subitem[0] == "Escreva algumas linhas sobre sua história e seus sonhos de vida.") {
+                        if (subitem[0] == "Escreva algumas linhas sobre sua história e seus sonhos de vida." || subitem[0] == "Informe o número do seu RA." || subitem[0] == "Qual a sua data de nascimento?" || subitem[0] == "Quais assuntos você pesquisa?" || subitem[0] == "Quais fontes de entretenimento cultural você usa") {
                           toggleBubble();
                         } else {
                           toggle();
