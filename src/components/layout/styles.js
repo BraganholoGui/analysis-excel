@@ -19,5 +19,5 @@ export const GridHeader = styled.header`
 
 export const GridMain = styled.main`
   grid-area: main;
-  background-color: #FBFCFD;
+  background-color: #FFF8DC; //mesma cor que o header
 `;
