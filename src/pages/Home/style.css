@@ -5,3 +5,17 @@
   border-radius: 5px;
   border: 2px solid #ccc;
 }
+input{
+  all: unset;
+  border: 1px solid rgba(255,20,147, 0.5);
+width: 15px;
+height: 15px;
+display: inline-block;
+border:1 px solid rgba(255,20,147, 0.5);
+margin-right: 5px;
+}
+input:checked{
+background-color: rgba(255,20,147, 0.5);
+width: 15px;
+height: 15px;
+}
