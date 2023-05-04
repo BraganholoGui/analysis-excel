@@ -85,6 +85,7 @@ function Home() {
       listNames.push(item[0])
       listQtds.push(item[1])
     })
+    console.log(listAux)
 
     const options = {
       scales: { x: { display: false, stepSize: 5, }, y: { display: false, stepSize: 5, } },
@@ -96,7 +97,7 @@ function Home() {
               font: {
                   size: 15,
                 },
-                boxHeight:18
+                boxHeight:20
           },
           // maxHeight:500,
           // maxWidth:100,
@@ -112,7 +113,7 @@ function Home() {
           data: Array.from({ length: item[1] }, () => ({
             x: getRandomNumber(0, 20),
             y: getRandomNumber(0, 20),
-            r: item[1] * 6,
+            r: 6,
           })),
           backgroundColor: 'rgba(255, 99, 132, 0.5)',
           pointStyle: 'rectRounded',
@@ -189,10 +190,6 @@ function Home() {
     });
     return result
   }
-
-  useEffect(() => {
-    // jsonToJsonArray();
-  }, [json])
 
   return (
     <div>
