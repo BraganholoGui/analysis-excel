@@ -12,24 +12,9 @@ function Layout({ children, ...rest }) {
   // const history = useHistory();
   const location = useLocation();
 
-  // async function loadData() {
-  //   setUrl(history.location.pathname)
-  //   let userLogado = await localStorage.getItem("token") || false;
-  //   if ((userLogado === "null" || !userLogado) && history.location.pathname != '/login' ) {
-  //     localStorage.removeItem("token")
-  //     history.push('/login')
-  //     return;
-  //   }
-  // }
-  // useEffect(() => {
-  //   loadData();
-  // }, [location]);
 
   return (
     <S.Grid {...rest}>
-      {/* <S.GridNav>
-        <Navbar visible={showNav} close={toggle} setCompact={setCompact} />
-      </S.GridNav> */}
       <S.GridHeader>
         <Header />
       </S.GridHeader>

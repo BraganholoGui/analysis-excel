@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 const XLSX = require('xlsx');
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
+ChartJS.register(LinearScale, PointElement, Tooltip, Legend); //é o que faz o gráfico funcionar
 
 function Home() {
   const [json, setJson] = useState(null);
@@ -22,7 +22,7 @@ function Home() {
   const [title, setTitle] = useState('');
   let cont = 0;
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => setIsOpen(!isOpen); // 
   const toggleBubble = () => setIsOpenBubble(!isOpenBubble);
 
   const handleFileChange = (event) => {
@@ -149,20 +149,21 @@ function Home() {
           label: '# of Votes',
           data: listQtds,
           backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
+            'rgba(255,20,147, 0.9)',
+            'rgba(255,20,147, 0.7)',
+            'rgba(255,20,147, 0.5)',
+            'rgba(255,20,147, 0.3)',
+            'rgba(255,20,147, 0.2)',
+            'rgba(255,20,147, 0.1)',
+     
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
+            'rgba(255,20,147, 0.9)',
+            'rgba(255,20,147, 0.7)',
+            'rgba(255,20,147, 0.5)',
+            'rgba(255,20,147, 0.3)',
+            'rgba(255,20,147, 0.2)',
+            'rgba(255,20,147, 0.1)',
           ],
           borderWidth: 1,
         },
@@ -192,7 +193,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div style={{background: '#FFF8DC'}}>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
         <input type="file" onChange={handleFileChange} />
       </div>
@@ -206,7 +207,7 @@ function Home() {
                 {
                   cont == 1 ?
                     item.map((subitem, subindex) => (
-                      <button style={{ width: '400px', margin: '2%', minHeight: '100px', maxHeight: '100px', backgroundColor: '#40E0D0', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
+                      <button style={{ width: '400px', margin: '2%', color: '#fff', letterSpacing: '3px', fontFamily: 'monospace', minHeight: '100px', maxHeight: '100px', backgroundImage: 'linear-gradient(160deg, #708090, #BC8F8F)', border: '1px solid grey', borderRadius: '20px' }} onClick={() => {
                         if (subitem[0] == "Escreva algumas linhas sobre sua história e seus sonhos de vida." || subitem[0] == "Informe o número do seu RA." || subitem[0] == "Qual a sua data de nascimento?" || subitem[0] == "Quais assuntos você pesquisa?" || subitem[0] == "Quais fontes de entretenimento cultural você usa") {
                           toggleBubble();
                         } else {
