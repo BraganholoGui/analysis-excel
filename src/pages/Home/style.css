@@ -5,6 +5,9 @@
   border-radius: 5px;
   border: 2px solid #ccc;
 }
+.inputFile{
+  all: unset;
+}
 input{
   all: unset;
   border: 1px solid rgba(255,20,147, 0.5);

@@ -200,7 +200,7 @@ function Home() {
   return (
     <div style={{ background: '#FFF8DC' }}>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2%' }}>
-        <input type="file" onChange={handleFileChange} />
+        <input type="file" onChange={handleFileChange} className='inputFile' />
       </div>
       <div style={{ display: 'grid', flexDirection: 'column', width: '100%', alignItems: 'center', justifyContent: 'center', gridTemplateColumns: 'auto auto auto' }}>
         {json && json.length > 0 ?
